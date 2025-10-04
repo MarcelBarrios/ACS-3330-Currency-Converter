@@ -71,19 +71,16 @@ const ConverterForm = ({ currencies, onConvert, isConverting }) => {
                     value={amount}
                     onChange={handleAmountChange}
                     placeholder="1.00"
-                    className="text-lg pl-3"
-                    style={{
-                        borderColor: "rgb(209, 213, 219)",
-                        borderWidth: "1px",
-                        lineHeight: "2.5rem",
-                        borderRadius: "0.5rem",
-                    }}
+                    className="text-lg w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-primary"
                     inputMode="decimal"
                 />
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-2 items-end">
-                <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+            {/* CHANGED: Switched from Grid to a more robust Flexbox layout for responsiveness */}
+            <div className="flex flex-col md:flex-row md:items-end md:gap-2">
+
+                {/* 'From' Currency */}
+                <motion.div className="flex-1" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
                     <label htmlFor="fromCurrency" className="block text-sm font-medium text-brand-text-primary mb-1">
                         From
                     </label>
@@ -95,19 +92,23 @@ const ConverterForm = ({ currencies, onConvert, isConverting }) => {
                     />
                 </motion.div>
 
+                {/* Swap Button */}
                 <motion.button
                     type="button"
                     onClick={handleSwapCurrencies}
-                    className="p-3 bg-gray-100 hover:bg-gray-200 rounded-full text-brand-primary transition-colors duration-150 ease-in-out flex items-center justify-center mx-auto md:mt-6 h-11 w-11"
+                    // CHANGED: Adjusted margin/padding and self-alignment for better mobile stacking
+                    className="p-2 my-2 md:mb-1 bg-gray-100 hover:bg-gray-200 rounded-full text-brand-primary transition-colors duration-150 ease-in-out flex items-center justify-center self-center md:self-end h-11 w-11"
                     aria-label="Swap currencies"
-                    whileHover={{ scale: 1.1, rotate: 180 }}
+                    whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     transition={{ duration: 0.2 }}
                 >
-                    <FaExchangeAlt size={18} />
+                    {/* CHANGED: The icon now rotates for a better visual cue on desktop */}
+                    <FaExchangeAlt size={18} className="md:rotate-90" />
                 </motion.button>
 
-                <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
+                {/* 'To' Currency */}
+                <motion.div className="flex-1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }}>
                     <label htmlFor="toCurrency" className="block text-sm font-medium text-brand-text-primary mb-1">
                         To
                     </label>

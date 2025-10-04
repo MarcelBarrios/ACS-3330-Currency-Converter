@@ -1,6 +1,6 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import ConverterForm from '../components/ConverterForm';
@@ -19,7 +19,6 @@ import {
 
 const ConverterPage = () => {
     const dispatch = useDispatch();
-    const queryClient = useQueryClient();
     const { amount, fromCurrency, toCurrency, conversionResult, lastUpdated, error: reduxError } = useSelector(selectConverterState);
 
     const { data: currencies, isLoading: isLoadingCurrencies, error: currenciesError } = useQuery({
@@ -74,7 +73,8 @@ const ConverterPage = () => {
 
     return (
         <motion.div
-            className="bg-white p-6 sm:p-8 rounded-xl shadow-xl space-y-6"
+            // CHANGED: Adjusted padding for different screen sizes
+            className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-xl space-y-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: "easeOut" }}
