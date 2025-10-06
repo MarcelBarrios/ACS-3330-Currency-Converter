@@ -7,6 +7,7 @@ import ConverterForm from '../components/ConverterForm';
 import ResultDisplay from '../components/ResultDisplay';
 import LoadingSpinner from '../components/UI/LoadingSpinner';
 import ErrorMessage from '../components/UI/ErrorMessage';
+import HistoricalChart from '../components/HistoricalChart';
 
 import { fetchCurrencies, fetchConversionRate } from '../api/frankfurterAPI';
 import {
@@ -73,7 +74,6 @@ const ConverterPage = () => {
 
     return (
         <motion.div
-            // CHANGED: Adjusted padding for different screen sizes
             className="bg-white p-4 sm:p-6 md:p-8 rounded-xl shadow-xl space-y-6"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
@@ -126,6 +126,7 @@ const ConverterPage = () => {
                             rateDate={lastUpdated}
                             allCurrencies={currencies || {}}
                         />
+                        <HistoricalChart fromCurrency={fromCurrency} toCurrency={toCurrency} />
                     </motion.div>
                 )}
             </AnimatePresence>
